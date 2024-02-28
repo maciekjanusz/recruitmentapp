@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Github Users App</string>
+
+    <string name="navigation_users">Users</string>
+    <string name="cd_users">Users screen</string>
+    <string name="cd_account">Account screen\n</string>
+    <string name="navigation_account">Account</string>
+    <string name="content_desc_user_avatar">GitHub user %s avatar</string>
+    <string name="search_placeholder">Search users</string>
+    <string name="cd_search">Search users</string>
+    <string name="cd_error">Error indicator</string>
+    <string name="action_retry">Retry</string>
+    <string name="error_indicator">Something went wrong.</string>
+    <string name="cd_menu">Menu</string>
+    <string name="home_display_title">GitHub Users</string>
+    <string name="cd_home">Home screen</string>
+    <string name="scroll_to_top_toast">New search results</string>
+</resources>
