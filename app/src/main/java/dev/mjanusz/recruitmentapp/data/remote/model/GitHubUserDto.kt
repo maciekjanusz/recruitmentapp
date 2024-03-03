@@ -31,20 +31,3 @@ data class GitHubUserDetailsDto(
     @Serializable(KOffsetDateTimeSerializer::class)
     @SerialName("created_at") val updatedAt: OffsetDateTime,
 )
-
-/*
-"name": "monalisa octocat",
-  "company": "GitHub",
-  "blog": "https://github.com/blog",
-  "location": "San Francisco",
-  "email": "octocat@github.com",
-  "hireable": false,
-  "bio": "There once was...",
-  "twitter_username": "monatheoctocat",
-  "public_repos": 2,
-  "public_gists": 1,
-  "followers": 20,
-  "following": 0,
-  "created_at": "2008-01-14T04:33:35Z",
-  "updated_at": "2008-01-14T04:33:35Z"
- */

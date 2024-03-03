@@ -1,3 +1,5 @@
+@file:Suppress("UnnecessaryOptInAnnotation")
+
 package dev.mjanusz.recruitmentapp.data.paging
 
 import androidx.paging.ExperimentalPagingApi
@@ -28,6 +30,7 @@ import org.mockito.kotlin.whenever
 import retrofit2.HttpException
 import retrofit2.Response
 
+@Suppress("UnnecessaryOptInAnnotation")
 @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
 class SearchUsersMediatorTest : MockDatabaseTransactionTest() {
 

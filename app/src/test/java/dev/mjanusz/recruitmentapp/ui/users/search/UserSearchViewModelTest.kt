@@ -70,7 +70,7 @@ class UserSearchViewModelTest {
     }
 
     @Test
-    fun `test query update`() = runTest() {
+    fun `test query update`() = runTest {
         val query1 = "user"
         val query2 = "username"
         viewModel.searchQuery.test {
