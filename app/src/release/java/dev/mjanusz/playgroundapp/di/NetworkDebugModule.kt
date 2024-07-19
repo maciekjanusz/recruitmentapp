@@ -1,4 +1,4 @@
-package dev.mjanusz.playgroundapp.di
+package dev.mjanusz.recruitmentapp.di
 
 import dagger.Module
 
