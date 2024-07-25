@@ -25,6 +25,18 @@ class DatabaseModule {
 
     @Provides
     @Singleton
+    fun provideLanguagesDao(appDatabase: AppDatabase) = appDatabase.languageDao()
+
+    @Provides
+    @Singleton
+    fun provideRepositoriesDao(appDatabase: AppDatabase) = appDatabase.repositoryDao()
+
+    @Provides
+    @Singleton
+    fun provideFavouritesDao(appDatabase: AppDatabase) = appDatabase.favouritesDao()
+
+    @Provides
+    @Singleton
     fun provideUsersDao(appDatabase: AppDatabase) = appDatabase.userDao()
 
     @Provides

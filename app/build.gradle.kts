@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -16,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "dev.mjanusz.recruitmentapp"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -28,7 +29,8 @@ android {
         buildFeatures.buildConfig = true
         mapOf(
             "GITHUB_API_TOKEN" to "github.api_token",
-            "GITHUB_API_BASE_URL" to "github.base_url",
+            "GITHUB_API_BASE_URL" to "github.api_base_url",
+            "GITHUB_SITE_BASE_URL" to "github.site_base_url",
         ).forEach {
             buildConfigField("String", it.key,
                 "\"${gradleLocalProperties(rootDir, providers).getProperty(it.value)}\""
@@ -119,8 +121,6 @@ android {
     }
 }
 
-// TODO switch to using toml
-
 dependencies {
     /* Android */
     implementation(libs.androidx.ktx)
@@ -142,6 +142,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.jspoon)
+    implementation(libs.jspoon.converter)
 
     /* Paging */
     implementation(libs.androidx.paging.compose)
@@ -172,7 +174,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.truth)
     testImplementation(libs.mockk)
-
 
     /* UI testing */
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -87,7 +87,7 @@ fun UserSearchContent(
         leadingIcon = {
             Icon(
                 Icons.Default.Menu,
-                contentDescription = stringResource(id = R.string.cd_menu)
+                contentDescription = stringResource(id = R.string.cd_back)
             )
         },
         trailingIcon = {

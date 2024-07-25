@@ -13,12 +13,6 @@ interface GitHubApi {
         const val PAGE_SIZE = 30
     }
 
-    /*
-<https://api.github.com/users?since=46>; rel="next",
-<https://api.github.com/users{?since}>; rel="first"
-<https://api.github.com/users?since=91>; rel="next",
-<https://api.github.com/users{?since}>; rel="first"
-*/
     @GET("/users")
     suspend fun getUsers(
         @Query("since") since: Long,

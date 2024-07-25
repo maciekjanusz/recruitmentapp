@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mjanusz.recruitmentapp.common.LoadingState
 import dev.mjanusz.recruitmentapp.data.UserDetailsRepository
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
+import dev.mjanusz.recruitmentapp.data.local.model.UserDetailsEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -20,7 +20,7 @@ class UserViewModel @Inject constructor(
     private val userDetailsRepository: UserDetailsRepository
 ) : ViewModel() {
 
-    private val _userDetails = MutableStateFlow<LoadingState<UserDetails>>(LoadingState.loading())
+    private val _userDetails = MutableStateFlow<LoadingState<UserDetailsEntity>>(LoadingState.loading())
     val userDetails = _userDetails.asStateFlow()
 
     fun loadUserDetails(username: String) {

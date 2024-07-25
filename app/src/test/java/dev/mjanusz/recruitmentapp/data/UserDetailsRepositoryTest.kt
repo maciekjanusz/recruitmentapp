@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import dev.mjanusz.recruitmentapp.common.Failure
 import dev.mjanusz.recruitmentapp.common.LoadingState
 import dev.mjanusz.recruitmentapp.data.local.dao.UserDetailsDao
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
+import dev.mjanusz.recruitmentapp.data.local.model.UserDetailsEntity
 import dev.mjanusz.recruitmentapp.data.remote.GitHubApi
 import dev.mjanusz.recruitmentapp.test.OverrideMainDispatcherRule
 import dev.mjanusz.recruitmentapp.test.mockUser
@@ -39,8 +39,8 @@ class UserDetailsRepositoryTest {
     @Test
     fun `test get user details with successful remote fetch`() = runTest {
         // given
-        val insertArgumentCaptor = argumentCaptor<UserDetails>()
-        val mockDaoFlow = MutableSharedFlow<UserDetails>(replay = 1) // simulate non-completing flow
+        val insertArgumentCaptor = argumentCaptor<UserDetailsEntity>()
+        val mockDaoFlow = MutableSharedFlow<UserDetailsEntity>(replay = 1) // simulate non-completing flow
         mockDaoFlow.emit(mockUserDetails)
         doReturn(mockUserDetailsDto).whenever(mockApi).getUserDetails(mockUser.login)
         doReturn(mockDaoFlow).whenever(mockDao).getUserDetails(mockUser.login)
@@ -62,7 +62,7 @@ class UserDetailsRepositoryTest {
     fun `test get user details with empty cache and unsuccessful remote fetch`() = runTest {
         // given
         val errorMessage = "simulated exception"
-        val mockDaoFlow = MutableSharedFlow<UserDetails>(replay = 1) // simulate non-completing flow
+        val mockDaoFlow = MutableSharedFlow<UserDetailsEntity>(replay = 1) // simulate non-completing flow
         // do not emit any items to mockDaoFlow
         doThrow(RuntimeException(errorMessage)).whenever(mockApi).getUserDetails(mockUser.login)
         doReturn(mockDaoFlow).whenever(mockDao).getUserDetails(mockUser.login)
@@ -71,7 +71,7 @@ class UserDetailsRepositoryTest {
         // then
         flow.test {
             assertEquals(LoadingState.loading(), awaitItem())
-            assertTrue(awaitItem() is Failure<UserDetails>)
+            assertTrue(awaitItem() is Failure<UserDetailsEntity>)
         }
         verify(mockDao, never()).insertUserDetails(any())
     }

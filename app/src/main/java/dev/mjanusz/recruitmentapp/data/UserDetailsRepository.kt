@@ -3,7 +3,7 @@ package dev.mjanusz.recruitmentapp.data
 import dev.mjanusz.recruitmentapp.common.LoadingState
 import dev.mjanusz.recruitmentapp.common.Success
 import dev.mjanusz.recruitmentapp.data.local.dao.UserDetailsDao
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
+import dev.mjanusz.recruitmentapp.data.local.model.UserDetailsEntity
 import dev.mjanusz.recruitmentapp.data.local.model.toUserDetails
 import dev.mjanusz.recruitmentapp.data.remote.GitHubApi
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ class UserDetailsRepository @Inject constructor(
 
     suspend fun getUserDetails(
         username: String
-    ): Flow<LoadingState<UserDetails>> {
+    ): Flow<LoadingState<UserDetailsEntity>> {
         // single emission flow or error
         val fetchFlow =
             flow { emit(githubApi.getUserDetails(username)) }
@@ -52,10 +52,10 @@ class UserDetailsRepository @Inject constructor(
             .map { LoadingState.success(it) }
 
         return merge(fetchFlow, cacheFlow) // concurrent exec
-            .runningFold(LoadingState.loading<UserDetails>()) {
+            .runningFold(LoadingState.loading<UserDetailsEntity>()) {
                 // if there was success already, do not emit subsequent failure
                     accumulator, value ->
-                if (accumulator is Success<UserDetails> && value !is Success<UserDetails>)
+                if (accumulator is Success<UserDetailsEntity> && value !is Success<UserDetailsEntity>)
                     accumulator else value
             }
             .flowOn(Dispatchers.IO)

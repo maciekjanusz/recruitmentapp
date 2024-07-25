@@ -6,7 +6,6 @@ sealed interface LoadingState<out T: Any> {
         fun <T: Any> failure(throwable: Throwable): LoadingState<T> = Failure(throwable)
         fun <T: Any> loading(): LoadingState<T> = Loading()
     }
-
 }
 
 data class Success<out T : Any> internal constructor(val value: T) : LoadingState<T> {
@@ -51,4 +50,10 @@ class Loading<out T : Any> internal constructor(): LoadingState<T> {
     override fun hashCode(): Int {
         return javaClass.hashCode()
     }
+}
+
+inline fun <T: Any, R : Any> LoadingState<T>.mapValue(transform: (T) -> R): LoadingState<R> = when(this) {
+    is Failure -> LoadingState.failure(throwable)
+    is Loading -> LoadingState.loading()
+    is Success -> LoadingState.success(transform(value))
 }

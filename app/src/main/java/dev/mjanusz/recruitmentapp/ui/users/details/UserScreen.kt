@@ -22,8 +22,8 @@ import dev.mjanusz.recruitmentapp.R
 import dev.mjanusz.recruitmentapp.common.Failure
 import dev.mjanusz.recruitmentapp.common.Loading
 import dev.mjanusz.recruitmentapp.common.Success
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
-import dev.mjanusz.recruitmentapp.ui.common.ErrorIndicatorWithRetry
+import dev.mjanusz.recruitmentapp.data.local.model.UserDetailsEntity
+import dev.mjanusz.recruitmentapp.ui.common.FullScreenPlaceholder
 import dev.mjanusz.recruitmentapp.ui.theme.AppTypography
 import dev.mjanusz.recruitmentapp.ui.theme.largeElevation
 import java.time.OffsetDateTime
@@ -39,9 +39,10 @@ fun UserScreen(
 
     when (userDetailsState) {
         is Failure -> {
-            val message = (userDetailsState as Failure<UserDetails>).throwable.message
-            ErrorIndicatorWithRetry(
+            val message = (userDetailsState as Failure<UserDetailsEntity>).throwable.message
+            FullScreenPlaceholder(
                 message = "$message",
+                retryEnabled = true
             ) {
                 userViewModel.loadUserDetails(username)
             }
@@ -53,14 +54,14 @@ fun UserScreen(
         }
 
         is Success -> {
-            UserContent(userDetails = (userDetailsState as Success<UserDetails>).value)
+            UserContent(userDetails = (userDetailsState as Success<UserDetailsEntity>).value)
         }
     }
 }
 
 @Composable
 fun UserContent(
-    userDetails: UserDetails
+    userDetails: UserDetailsEntity
 ) {
     Surface(
         shadowElevation = largeElevation,
@@ -97,7 +98,7 @@ fun UserContent(
 @Composable
 fun PreviewUserContent() {
     UserContent(
-        userDetails = UserDetails(
+        userDetails = UserDetailsEntity(
             login = "username",
             id = 12345678,
             avatarUrl = "",

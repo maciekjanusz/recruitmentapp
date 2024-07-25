@@ -6,7 +6,7 @@ import dev.mjanusz.recruitmentapp.data.remote.model.GitHubUserDetailsDto
 import java.time.OffsetDateTime
 
 @Entity(tableName = "userDetails")
-data class UserDetails(
+data class UserDetailsEntity(
     @PrimaryKey val login: String,
     val id: Long,
     val avatarUrl: String,
@@ -24,7 +24,7 @@ data class UserDetails(
 )
 
 fun GitHubUserDetailsDto.toUserDetails() =
-    UserDetails(
+    UserDetailsEntity(
         login = login,
         id = id,
         avatarUrl = avatarUrl,

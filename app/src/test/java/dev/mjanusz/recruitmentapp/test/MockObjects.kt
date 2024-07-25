@@ -1,13 +1,13 @@
 package dev.mjanusz.recruitmentapp.test
 
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
+import dev.mjanusz.recruitmentapp.data.local.model.UserDetailsEntity
 import dev.mjanusz.recruitmentapp.data.remote.model.GitHubUserDetailsDto
 import dev.mjanusz.recruitmentapp.ui.model.User
 import java.time.OffsetDateTime
 
 val mockUser = User(0, "username", "mockUrl")
 
-val mockUserDetails = UserDetails(
+val mockUserDetails = UserDetailsEntity(
     login = mockUser.login,
     id = mockUser.id,
     avatarUrl = mockUser.avatarUrl,

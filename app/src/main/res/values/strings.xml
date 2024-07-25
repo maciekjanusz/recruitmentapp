@@ -2,10 +2,20 @@
     <string name="app_name">Github Users App</string>
 
     <string name="content_desc_user_avatar">GitHub user %s avatar</string>
-    <string name="search_placeholder">Search users</string>
+    <string name="search_placeholder">Choose language</string>
     <string name="cd_search">Search users</string>
     <string name="cd_error">Error indicator</string>
     <string name="action_retry">Retry</string>
-    <string name="cd_menu">Menu</string>
-    <string name="home_display_title">GitHub Users</string>
+    <string name="cd_back">Back</string>
+    <string name="home_display_title">Trending</string>
+    <string name="star_description">Stars</string>
+    <string name="repo_forked_description">Forks</string>
+    <string name="dot_fill_description">Language color</string>
+    <string name="person_description">Repository owner</string>
+    <string name="heart_description">Favourite</string>
+    <string name="codescan_description">Choose language</string>
+    <string name="select_language">Select language</string>
+    <string name="languages_description">Choose language</string>
+    <string name="any_language">Language</string>
+    <string name="no_results">Ooops! It looks like there are no trending %s repositories. Pick a different language!</string>
 </resources>
