@@ -1,5 +1,7 @@
 package dev.mjanusz.recruitmentapp.ui.trending
 
+import android.app.UiModeManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.DropdownMenu
@@ -57,6 +60,7 @@ import dev.mjanusz.recruitmentapp.AppState
 import dev.mjanusz.recruitmentapp.R
 import dev.mjanusz.recruitmentapp.data.remote.TrendingDateRange
 import dev.mjanusz.recruitmentapp.ui.common.TopBarAction
+import dev.mjanusz.recruitmentapp.ui.common.UiModeHelper
 import dev.mjanusz.recruitmentapp.ui.languages.LanguagePickerScreen
 import dev.mjanusz.recruitmentapp.ui.model.AnyLanguage
 import dev.mjanusz.recruitmentapp.ui.model.Repository
@@ -102,9 +106,7 @@ fun TrendingScreen(
         topBar = {
             TrendingAppBar(
                 scrollBehavior = scrollBehavior,
-                onActionClicked = { action ->
-                    viewModel.onActionClicked(action)
-                }
+                onSetUiMode = viewModel::onSetUiMode
             )
         }
     ) { innerPadding ->
@@ -148,24 +150,43 @@ fun TrendingScreen(
 @Composable
 fun TrendingAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
-    onActionClicked: (TopBarAction) -> Unit = { }
+    onSetUiMode: (UiModeHelper.UiMode) -> Unit = { }
 ) {
+    var showThemeDropdown by remember { mutableStateOf(false) }
+
     TopAppBar(
         title = {
             Text(
-                text = stringResource(id = R.string.home_display_title), style =
-                AppTypography.titleLarge
+                text = stringResource(id = R.string.home_display_title),
+                style = AppTypography.titleLarge,
             )
         },
         actions = {
-//            IconButton(onClick = { onActionClicked(TopBarAction.OPEN_FILTER) }) {
-//                Icon(
-//                    painter = painterResource(id = R.drawable.codescan),
-//                    contentDescription = stringResource(
-//                        id = R.string.codescan_description
-//                    )
-//                )
-//            }
+            Box(
+                modifier = Modifier
+                    .wrapContentSize(Alignment.TopStart)
+            ) {
+                IconButton(onClick = { showThemeDropdown = !showThemeDropdown }) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = stringResource(
+                            id = R.string.codescan_description
+                        )
+                    )
+                }
+                DropdownMenu(expanded = showThemeDropdown,
+                    onDismissRequest = { showThemeDropdown = false }) {
+                    UiModeHelper.UiMode.entries.forEach {
+                        DropdownMenuItem(
+                            text = { Text(text = stringResource(it.stringRes)) },
+                            onClick = {
+                                showThemeDropdown = false
+                                onSetUiMode(it)
+                            }
+                        )
+                    }
+                }
+            }
         },
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors().copy(
@@ -178,7 +199,9 @@ fun TrendingAppBar(
 @Preview
 @Composable
 fun PreviewTrendingAppBar() {
-    AppTheme {
+    AppTheme(
+        darkTheme = true
+    ) {
         TrendingAppBar(scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior())
     }
 }
@@ -427,7 +450,7 @@ fun RepositoryItem(
                             style = AppTypography.bodySmall,
                             color = MaterialTheme.colorScheme.outline,
                         )
-                        if(item.languageColor != null) {
+                        if (item.languageColor != null) {
                             Image(
                                 modifier = Modifier
                                     .size(12.dp)

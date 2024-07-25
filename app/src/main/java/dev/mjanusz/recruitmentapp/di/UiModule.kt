@@ -1,7 +1,10 @@
 package dev.mjanusz.recruitmentapp.di
 
+import android.app.UiModeManager
+import android.content.Context
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.mjanusz.recruitmentapp.ui.common.ChannelEventHandler
@@ -26,4 +29,5 @@ interface UiModule {
 
     @Binds
     fun bindActionEventHandler(handler: ChannelEventHandler<TopBarAction>): UIEventHandler<TopBarAction>
+
 }

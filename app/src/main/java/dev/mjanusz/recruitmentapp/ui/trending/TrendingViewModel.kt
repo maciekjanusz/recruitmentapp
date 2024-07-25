@@ -9,6 +9,7 @@ import dev.mjanusz.recruitmentapp.data.remote.TrendingDateRange
 import dev.mjanusz.recruitmentapp.ui.common.ChannelEventHandler
 import dev.mjanusz.recruitmentapp.ui.common.TopBarAction
 import dev.mjanusz.recruitmentapp.ui.common.UIEventHandler
+import dev.mjanusz.recruitmentapp.ui.common.UiModeHelper
 import dev.mjanusz.recruitmentapp.ui.model.AnyLanguage
 import dev.mjanusz.recruitmentapp.ui.model.Repository
 import dev.mjanusz.recruitmentapp.ui.model.RepositoryLanguage
@@ -28,6 +29,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TrendingViewModel @Inject constructor(
     private val githubTrendingSource: GitHubTrendingSource,
+    private val uiModeHelper: UiModeHelper,
     private val repoClickHandler: UIEventHandler<Repository> = ChannelEventHandler(),
     private val actionEventHandler: UIEventHandler<TopBarAction> = ChannelEventHandler()
 ) : ViewModel() {
@@ -58,9 +60,9 @@ class TrendingViewModel @Inject constructor(
                         githubTrendingSource.fetchAndUpdateTrendingRepos(pair.first, pair.second)
                         _loadingStates.value = IDLE
                     } catch (e: IOException) {
-
+                        // TODO: error indication
                     } catch (e: HttpException) {
-
+                        // TODO: error indication
                     }
                 }.collect()
             }
@@ -80,10 +82,6 @@ class TrendingViewModel @Inject constructor(
         viewModelScope.launch {
             repoClickHandler.onEvent(repository)
         }
-    }
-
-    fun retryAll() {
-        TODO("Not yet implemented")
     }
 
     fun onRepositoryFavClicked(repository: Repository) {
@@ -108,5 +106,9 @@ class TrendingViewModel @Inject constructor(
         viewModelScope.launch {
             _selectedDateRange.value = trendingDateRange
         }
+    }
+
+    fun onSetUiMode(uiMode: UiModeHelper.UiMode) {
+        uiModeHelper.setUiMode(uiMode)
     }
 }
