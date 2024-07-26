@@ -29,7 +29,6 @@ fun Home(
         }
         composable("repository/{owner}/{repo}") { navBackStackEntry ->
             RepositoryDetailsScreen(
-                appState,
                 owner = navBackStackEntry.arguments?.getString("owner")!!,
                 repo = navBackStackEntry.arguments?.getString("repo")!!
             )

@@ -14,8 +14,8 @@ import dev.mjanusz.recruitmentapp.ui.model.AnyLanguage
 import dev.mjanusz.recruitmentapp.ui.model.Repository
 import dev.mjanusz.recruitmentapp.ui.model.RepositoryLanguage
 import dev.mjanusz.recruitmentapp.ui.model.toRepository
-import dev.mjanusz.recruitmentapp.ui.trending.LoadingState.IDLE
-import dev.mjanusz.recruitmentapp.ui.trending.LoadingState.LOADING
+import dev.mjanusz.recruitmentapp.ui.common.LoadingState.IDLE
+import dev.mjanusz.recruitmentapp.ui.common.LoadingState.LOADING
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -23,12 +23,12 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import okio.IOException
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class TrendingViewModel @Inject constructor(
-    private val githubTrendingSource: GitHubTrendingSource,
+    private val gitHubTrendingSource: GitHubTrendingSource,
     private val uiModeHelper: UiModeHelper,
     private val repoClickHandler: UIEventHandler<Repository> = ChannelEventHandler(),
     private val actionEventHandler: UIEventHandler<TopBarAction> = ChannelEventHandler()
@@ -55,22 +55,19 @@ class TrendingViewModel @Inject constructor(
                 selectedLanguage.combine(selectedDateRange) { language, dateRange ->
                     language to dateRange
                 }.onEach { pair ->
+                    _loadingStates.value = LOADING
                     try {
-                        _loadingStates.value = LOADING
-                        githubTrendingSource.fetchAndUpdateTrendingRepos(pair.first, pair.second)
-                        _loadingStates.value = IDLE
+                        gitHubTrendingSource.fetchAndUpdateTrendingRepos(pair.first, pair.second)
                     } catch (e: IOException) {
                         // TODO: error indication
                     } catch (e: HttpException) {
                         // TODO: error indication
                     }
+                    _loadingStates.value = IDLE
                 }.collect()
             }
             launch {
-                githubTrendingSource.fetchAndUpdateLanguages()
-            }
-            launch {
-                githubTrendingSource.getTrendingRepos()
+                gitHubTrendingSource.getTrendingRepos()
                     .map { list -> list.map { it.toRepository() } }
                     .onEach { _trendingRepos.emit(it) }
                     .collect()
@@ -86,7 +83,7 @@ class TrendingViewModel @Inject constructor(
 
     fun onRepositoryFavClicked(repository: Repository) {
         viewModelScope.launch {
-            githubTrendingSource.toggleFav(repository.url, !repository.favourite)
+            gitHubTrendingSource.toggleFav(repository.url, !repository.favourite)
         }
     }
 

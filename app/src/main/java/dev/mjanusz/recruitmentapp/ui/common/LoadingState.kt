@@ -1,4 +1,4 @@
-package dev.mjanusz.recruitmentapp.ui.trending
+package dev.mjanusz.recruitmentapp.ui.common
 
 enum class LoadingState {
     IDLE,

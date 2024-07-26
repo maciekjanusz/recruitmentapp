@@ -2,6 +2,7 @@ package dev.mjanusz.recruitmentapp.data.remote
 
 import dev.mjanusz.recruitmentapp.data.remote.model.GitHubUserDetailsDto
 import dev.mjanusz.recruitmentapp.data.remote.model.GitHubUserDto
+import dev.mjanusz.recruitmentapp.data.remote.model.RepositoryDetailsDto
 import dev.mjanusz.recruitmentapp.data.remote.model.UserSearchDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -32,4 +33,10 @@ interface GitHubApi {
         @Query("order") sortOrder: String = "desc",
         @Query("page") page: Int
     ): UserSearchDto
+
+    @GET("/repos/{owner}/{repo}")
+    suspend fun getRepositoryDetails(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+    ): RepositoryDetailsDto
 }

@@ -1,7 +1,5 @@
 package dev.mjanusz.recruitmentapp.ui.trending
 
-import android.app.UiModeManager
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -59,6 +57,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.mjanusz.recruitmentapp.AppState
 import dev.mjanusz.recruitmentapp.R
 import dev.mjanusz.recruitmentapp.data.remote.TrendingDateRange
+import dev.mjanusz.recruitmentapp.ui.common.LoadingState
 import dev.mjanusz.recruitmentapp.ui.common.TopBarAction
 import dev.mjanusz.recruitmentapp.ui.common.UiModeHelper
 import dev.mjanusz.recruitmentapp.ui.languages.LanguagePickerScreen
@@ -415,7 +414,7 @@ fun RepositoryItem(
                         style = AppTypography.bodySmall,
                         color = MaterialTheme.colorScheme.outline
                     )
-                    Image(
+                    Icon(
                         modifier = Modifier
                             .size(12.dp)
                             .align(Alignment.CenterVertically),
@@ -432,7 +431,7 @@ fun RepositoryItem(
                         style = AppTypography.bodySmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
-                    Image(
+                    Icon(
                         modifier = Modifier
                             .size(12.dp)
                             .align(Alignment.CenterVertically),

@@ -21,4 +21,9 @@
     <string name="mode_light">Light mode</string>
     <string name="mode_dark">Dark mode</string>
     <string name="mode_system">Use system setting</string>
+    <string name="eye_description">Watchers</string>
+    <string name="stats">Stats</string>
+    <string name="language">Language</string>
+    <string name="description">Description</string>
+    <string name="owner">By</string>
 </resources>

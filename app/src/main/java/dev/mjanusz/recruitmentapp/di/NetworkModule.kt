@@ -26,7 +26,7 @@ import javax.inject.Singleton
     ]
 )
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     fun provideDefaultNetworkConfig() = NetworkConfig(

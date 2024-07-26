@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
 import androidx.room.util.query
+import coil.network.HttpException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mjanusz.recruitmentapp.data.GitHubTrendingSource
+import dev.mjanusz.recruitmentapp.ui.common.ChannelEventHandler
 import dev.mjanusz.recruitmentapp.ui.common.UIEventHandler
 import dev.mjanusz.recruitmentapp.ui.common.USER_INPUT_DEBOUNCE_MILLIS
 import dev.mjanusz.recruitmentapp.ui.model.AnyLanguage
@@ -23,12 +25,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class LanguagesPickerViewModel @Inject constructor(
     private val gitHubTrendingSource: GitHubTrendingSource,
-    private val languageClickHandler: UIEventHandler<RepositoryLanguage>
+    private val languageClickHandler: UIEventHandler<RepositoryLanguage> = ChannelEventHandler()
 ) : ViewModel() {
 
     val languageClicked by languageClickHandler
@@ -51,7 +54,13 @@ class LanguagesPickerViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            gitHubTrendingSource.fetchAndUpdateLanguages()
+            try {
+                gitHubTrendingSource.fetchAndUpdateLanguages()
+            } catch (e: IOException) {
+                // TODO: error indication
+            } catch (e: HttpException) {
+                // TODO: error indication
+            }
         }
     }
 

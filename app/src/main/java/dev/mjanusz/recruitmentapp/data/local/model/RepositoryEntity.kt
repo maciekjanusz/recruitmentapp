@@ -24,8 +24,9 @@ data class RepositoryEntity(
     val forksCount: Int,
 )
 
-fun TrendingReposDto.toEntities(numberFormat: DecimalFormat = NumberFormat.getNumberInstance(Locale.ENGLISH) as DecimalFormat) =
+fun TrendingReposDto.toEntities() =
     repositories?.mapIndexed { i, v ->
+        val numberFormat: DecimalFormat = NumberFormat.getNumberInstance(Locale.ENGLISH) as DecimalFormat
         val ownerAndRepo = v.handle
             .split("/")
             .map{it.trim()}
