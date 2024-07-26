@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
-import dev.mjanusz.recruitmentapp.BuildConfig
 import dev.mjanusz.recruitmentapp.data.remote.AuthInterceptor
 import dev.mjanusz.recruitmentapp.data.remote.GitHubApi
 import dev.mjanusz.recruitmentapp.data.remote.GithubTrendingApi

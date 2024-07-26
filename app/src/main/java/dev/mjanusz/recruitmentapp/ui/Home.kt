@@ -2,7 +2,6 @@ package dev.mjanusz.recruitmentapp.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import dev.mjanusz.recruitmentapp.AppState
