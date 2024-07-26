@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import dev.mjanusz.recruitmentapp.data.remote.model.RepositoryDetailsDto
 import dev.mjanusz.recruitmentapp.data.remote.model.RepositoryOwnerDto
-import kotlinx.serialization.SerialName
 import java.time.OffsetDateTime
 
 @Entity(tableName = "repository_details")

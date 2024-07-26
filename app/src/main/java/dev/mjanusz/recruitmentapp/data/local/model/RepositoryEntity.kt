@@ -3,10 +3,7 @@ package dev.mjanusz.recruitmentapp.data.local.model
 import android.graphics.Color
 import android.icu.text.DecimalFormat
 import android.icu.text.NumberFormat
-import android.util.Log
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import dev.mjanusz.recruitmentapp.data.remote.model.TrendingReposDto
 import java.util.Locale

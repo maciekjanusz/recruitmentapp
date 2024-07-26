@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
-import dev.mjanusz.recruitmentapp.data.local.model.RepositoryDetailsEntity
 import dev.mjanusz.recruitmentapp.data.local.model.RepositoryEntity
 import dev.mjanusz.recruitmentapp.data.local.model.RepositoryFavView
 import kotlinx.coroutines.flow.Flow
