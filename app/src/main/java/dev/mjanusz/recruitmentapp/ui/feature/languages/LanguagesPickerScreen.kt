@@ -42,7 +42,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun LanguagePickerScreen(
-    appState: AppState,
     onLanguageSelected: (RepositoryLanguage) -> Unit = {},
     viewModel: LanguagesPickerViewModel = hiltViewModel()
 ) {

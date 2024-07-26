@@ -13,7 +13,6 @@ import dev.mjanusz.recruitmentapp.ui.feature.trending.TrendingScreen
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Home(
-    modifier: Modifier = Modifier,
     appState: AppState = rememberAppState()
 ) {
     NavHost(

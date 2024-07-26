@@ -29,11 +29,11 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Provides
-    fun provideDefaultNetworkConfig() = NetworkConfig(
-        apiBaseUrl = BuildConfig.GITHUB_API_BASE_URL,
+    fun provideDefaultNetworkConfig() = NetworkConfig()
+        /*apiBaseUrl = BuildConfig.GITHUB_API_BASE_URL,
         siteBaseUrl = BuildConfig.GITHUB_SITE_BASE_URL,
-        apiToken = BuildConfig.GITHUB_API_TOKEN
-    )
+        apiToken = BuildConfig.GITHUB_API_TOKEN*/
+        // this code is for build config field injected NetworkConfig
 
     @Provides
     @IntoSet

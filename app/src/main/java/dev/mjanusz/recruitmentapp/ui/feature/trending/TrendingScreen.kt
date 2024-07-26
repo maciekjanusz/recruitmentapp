@@ -74,7 +74,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun TrendingScreen(
     appState: AppState,
-    modifier: Modifier = Modifier,
     viewModel: TrendingViewModel = hiltViewModel()
 ) {
     val trendingRepositories by viewModel.trendingRepos.collectAsStateWithLifecycle()
@@ -117,7 +116,6 @@ fun TrendingScreen(
                 onDismissRequest = { showLanguagesSheet = false },
             ) {
                 LanguagePickerScreen(
-                    appState = appState,
                     onLanguageSelected = {
                         showLanguagesSheet = false
                         viewModel.onLanguageSelected(it)
