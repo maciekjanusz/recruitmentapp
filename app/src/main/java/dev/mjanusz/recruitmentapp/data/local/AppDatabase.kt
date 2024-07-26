@@ -3,20 +3,27 @@ package dev.mjanusz.recruitmentapp.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import dev.mjanusz.recruitmentapp.data.local.dao.UserDao
-import dev.mjanusz.recruitmentapp.data.local.dao.UserDetailsDao
-import dev.mjanusz.recruitmentapp.data.local.dao.UserSearchResultsDao
-import dev.mjanusz.recruitmentapp.data.local.model.UserDetails
-import dev.mjanusz.recruitmentapp.data.local.model.UserEntity
-import dev.mjanusz.recruitmentapp.data.local.model.UserSearchResultEntity
+import dev.mjanusz.recruitmentapp.data.local.dao.FavouritesDao
+import dev.mjanusz.recruitmentapp.data.local.dao.LanguageDao
+import dev.mjanusz.recruitmentapp.data.local.dao.RepositoriesDao
+import dev.mjanusz.recruitmentapp.data.local.dao.RepositoryDetailsDao
+import dev.mjanusz.recruitmentapp.data.local.model.FavouriteRepoEntity
+import dev.mjanusz.recruitmentapp.data.local.model.LanguageEntity
+import dev.mjanusz.recruitmentapp.data.local.model.RepositoryDetailsEntity
+import dev.mjanusz.recruitmentapp.data.local.model.RepositoryEntity
+import dev.mjanusz.recruitmentapp.data.local.model.RepositoryFavView
 
 const val DATABASE_DEFAULT_NAME = "app_database"
 
 @Database(
     entities = [
-        UserEntity::class,
-        UserSearchResultEntity::class,
-        UserDetails::class
+        LanguageEntity::class,
+        RepositoryEntity::class,
+        FavouriteRepoEntity::class,
+        RepositoryDetailsEntity::class,
+    ],
+    views = [
+        RepositoryFavView::class
     ],
     version = 1,
     exportSchema = false
@@ -24,9 +31,12 @@ const val DATABASE_DEFAULT_NAME = "app_database"
 @TypeConverters(DateTimeTypeConverters::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
+    abstract fun languageDao(): LanguageDao
 
-    abstract fun userDetailsDao(): UserDetailsDao
+    abstract fun repositoryDao(): RepositoriesDao
 
-    abstract fun userSearchResultsDao(): UserSearchResultsDao
+    abstract fun favouritesDao(): FavouritesDao
+
+    abstract fun repositoryDetailsDao(): RepositoryDetailsDao
+
 }

@@ -1,11 +1,26 @@
 <resources>
-    <string name="app_name">Github Users App</string>
+    <string name="app_name">GitHub Trending</string>
 
     <string name="content_desc_user_avatar">GitHub user %s avatar</string>
-    <string name="search_placeholder">Search users</string>
-    <string name="cd_search">Search users</string>
+    <string name="search_placeholder">Choose language</string>
     <string name="cd_error">Error indicator</string>
     <string name="action_retry">Retry</string>
-    <string name="cd_menu">Menu</string>
-    <string name="home_display_title">GitHub Users</string>
+    <string name="home_display_title">Trending</string>
+    <string name="star_description">Stars</string>
+    <string name="repo_forked_description">Forks</string>
+    <string name="dot_fill_description">Language color</string>
+    <string name="heart_description">Favourite</string>
+    <string name="codescan_description">Choose language</string>
+    <string name="languages_description">Choose language</string>
+    <string name="any_language">Language</string>
+    <string name="mode_light">Light mode</string>
+    <string name="mode_dark">Dark mode</string>
+    <string name="mode_system">Use system setting</string>
+    <string name="eye_description">Watchers</string>
+    <string name="stats">Stats</string>
+    <string name="language">Language</string>
+    <string name="description">Description</string>
+    <string name="owner">By</string>
+    <string name="cd_search">Search</string>
+    <string name="no_results">Ooops! \nThere are no trending %s repositories.</string>
 </resources>
